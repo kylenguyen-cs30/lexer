@@ -2,8 +2,6 @@
 # Email: Hnguyen1193@csu.fullerton.edu
 # Project: Lexical Analyzer
 
-import sys
-
 
 class Lexer:
     def __init__(self):
@@ -15,16 +13,17 @@ class Lexer:
 
 def main():
     # read input file
-    path = "~/Developer/projects/lexer/sample1.txt"
-    file_open = open(path, "r")
+    lines = []
 
+    with open("sample1.txt", "r") as file:
+        for line in file:
+            lines.append(line.strip())
+
+    print(lines)
     # put them into a long array
-    str_arr = file_open.read()
-    print(str_arr)
-
     # use lexer to tokenizing the inputs
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
