@@ -2,8 +2,6 @@
 # Email: Hnguyen1193@csu.fullerton.edu
 # Project: Lexical Analyzer
 
-import sys
-
 
 class Lexer:
     def __init__(self):
@@ -259,36 +257,18 @@ class Lexer:
 
 def main():
     # read input file
-    path = "./sample1.txt"
-    try:
-        with open(path, "r") as file_open:
-            input_text = file_open.read()
 
-    except FileNotFoundError:
-        print(f"Error: File {path} not found")
-        return 1
-    except Exception as e:
-        print(f"Error reading file: {e}")
-        return 1
+    lines = []
 
-    print("Input Text:")
-    print(input_text)
-    print("-" * 50)
+    with open("sample1.txt", "r") as file:
+        for line in file:
+            lines.append(line.strip())
 
-    # use lexer
-    lexer = Lexer()
-    tokens = lexer.scanner(input_text)
+    print(lines)
+    # put them into a long array
 
-    # print tokens
-    print("Tokens:")
-    for token in tokens:
-        print(
-            f"Type:  {token['type']}, Lexeme : '{token['lexeme']}' , Position: {token['position']}"
-        )
-
-    # use lexer to tokenizing the inputs
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
