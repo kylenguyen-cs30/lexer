@@ -1,6 +1,7 @@
 # Name : Hoang Nguyen
 # Email: Hnguyen1193@csu.fullerton.edu
 # Project: Lexical Analyzer
+import sys
 
 
 class Lexer:
@@ -204,30 +205,6 @@ class Lexer:
         # determine token type
         token_type = "UNKNOWN"
 
-        # determine token type
-        """ if current_state in self.token_types: """
-        """     base_type = self.token_types[current_state] """
-        """     token_type = self.token_types_mapping.get(base_type, "UNKNOWN") """
-        """"""
-        """     # check if identifier is actually a keyword """
-        """     if token_type == "IDENTIFIER" and lexeme in self.keywords: """
-        """         token_type = "KEYWORD" """
-        """         print(f" -> changed token type to KEYWORD") """
-        """"""
-        """     # map operators according to your required tokens """
-        """     if token_type == "OPERATOR": """
-        """         if lexeme == ":=": """
-        """             lexeme = "=" """
-        """             print(f" -> changed lexeme to {lexeme}") """
-        """     print( """
-        """         f"Returning token: Type: {token_type}, Lexeme: '{lexeme}' , Position: {lexeme_start}" """
-        """     ) """
-        """     return {"type": token_type, "lexeme": lexeme, "position": lexeme_start} """
-        """"""
-        """ print(f"Returning UNKNOWN token: Lexeme: '{lexeme}', Position {lexeme_start}") """
-        """ return {"type": "UNKNOWN", "lexeme": lexeme, "position": lexeme_start} """
-        """"""
-
         # Identify token type
         if lexeme.isalpha():
             if lexeme in self.keywords:
@@ -256,19 +233,34 @@ class Lexer:
 
 
 def main():
-    # read input file
+    # Read input file
+    path = "src/sample1.txt"
+    try:
+        with open(path, "r") as file_open:
+            input_text = file_open.read()
+    except FileNotFoundError:
+        print(f"Error: File {path} not found")
+        return 1
+    except Exception as e:
+        print(f"Error reading file: {e}")
+        return 1
 
-    lines = []
+    print("Input text:")
+    print(input_text)
+    print("-" * 50)
 
-    with open("sample1.txt", "r") as file:
-        for line in file:
-            lines.append(line.strip())
+    lexer = Lexer()
+    tokens = lexer.scanner(input_text)
 
-    print(lines)
-    # put them into a long array
+    # Print tokens
+    print("Tokens:")
+    for token in tokens:
+        print(
+            f"Type: {token['type']}, Lexeme: '{token['lexeme']}', Position: {token['position']}"
+        )
 
     return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
