@@ -91,9 +91,9 @@ class Lexer:
         elif char.isdigit():
             return 1
         elif char == "{":
-            return 12
+            return 3
         elif char == "}":
-            return 12
+            return 3
         elif char == "(":
             return 4
         elif char == "*":
@@ -138,6 +138,8 @@ class Lexer:
         return "\n".join(lines)
 
     def get_next_token(self):
+        # the position of the current index is at the end
+        # of the file.
         if self.position >= len(self.input_string):
             return None
 
@@ -177,6 +179,7 @@ class Lexer:
                 lexeme_end = self.position
                 backup_occurred = True
                 print(f"  -> Backup state reached,setting lexeme_end to {lexeme_end}")
+                break
 
             # move to next state
             current_state = next_state
@@ -234,7 +237,7 @@ class Lexer:
 
 def main():
     # Read input file
-    path = "src/sample1.txt"
+    path = "sample1.txt"
     try:
         with open(path, "r") as file_open:
             input_text = file_open.read()
