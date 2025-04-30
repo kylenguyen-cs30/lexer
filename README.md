@@ -1,4 +1,5 @@
-- CPSC 323 - Compiler and Language class
+# Team members :
 
-* team :
-  Hoang Nguyen
+- Hoang Nguyen
+- Ashley Park
+- Azaan Mavandadipur
